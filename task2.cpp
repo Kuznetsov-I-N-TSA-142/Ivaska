@@ -39,7 +39,7 @@ double areaRectangle(const double a,const double b);
  * @param b-число
  * @return- перимeтр прямоугольника
 */
-double perimeterRectangle(double a, double b);
+double perimeterRectangle(const double a,const double b);
 
 int main()
 {
