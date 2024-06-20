@@ -5,44 +5,36 @@
 using namespace std;
 
 /**
- * @brief оператор выбора способа заполнения массива
+ * @brief оператор выбоа способа заполнения массива
  * @param RANDOM = 0 автоматическое заполнение
  * @param MANUALLY =1 ручное заполнение
  */
-enum SELECT { RANDOM = 0, MANUALLY = 1 };
+enum FillMethod { RANDOM, MANUAL };
 
-/**
-
-* Эта функция принимает вектор целых чисел и возвращает наибольшее отрицательное число в векторе.
-* Если в векторе нет отрицательных чисел, она возвращает INT_MIN.
-* @param - Вектор целых чисел
-* @возвращает наибольшее отрицательное число в векторе или INT_MIN, если отрицательных чисел нет
-*/
-int getFirstN(int* arr, const int n);
 /**
  * @brief проверяет размер массива
  * @param n - размер массива
  */
-void checkN(const int n);
+void validateArraySize(int size);
 
 /**
  * @brief считывает размер массива
  * @return размер массива в беззнаковом типе данных
  */
-size_t getSize();
+int getArraySize();
 
 /**
  * @brief считывает значение типа int
  * @return считанное значение целочисленное
  */
-int getNumber();
+int getInteger();
 
 /**
  * @brief вывод массива на экран
  * @param arr - массив
  * @param n - размер массива
  */
-void printArray(const int* arr, const int n);
+void printArray(const int* array, int size);
 
 /**
  * @brief заполнение массива автоматически случайнвми числами в заданном диапазоне
@@ -51,14 +43,14 @@ void printArray(const int* arr, const int n);
  * @param min - минимальное значение диапазона значений элементов массива
  * @param max - максимальное значение диапазона значений элементов массива
  */
-void fillArrayRandom(int* arr, const int n, const int min, const int max);
+void fillArrayRandomly(int* array, int size, int min, int max);
 
 /**
  * @brief проверяет диапазон
  * @param min - минимальное значение диапазона значений элементов массива
  * @param max - максимальное значение диапазона значений элементов массива
  */
-void checkRange(const int min, const int max);
+void validateRange(int min, int max);
 
 /**
  * @brief находит сумму элементов массива, имеющих нечетное значение.
@@ -66,7 +58,7 @@ void checkRange(const int min, const int max);
  * @param n Размер массива.
  * @return Сумма элементов массива с нечетными значениями.
  */
-int findSumOf(int arr[], const int n);
+int sumOddElements(const int array[], int size);
 
 /**
  * @brief заменяет второй элемент массива на максимальный среди отрицательных.
@@ -74,7 +66,7 @@ int findSumOf(int arr[], const int n);
  * @param arr Массив целых чисел.
  * @param n Размер массива.
  */
-void replaceSMaxNegative(int arr[], const int n);
+void replaceSecondWithMaxNegative(int array[], int size);
 
 /**
  * @brief  выводит индексы элементов массива, значения которых больше заданного числа A.
@@ -82,7 +74,7 @@ void replaceSMaxNegative(int arr[], const int n);
  * @param n Размер массива.
  * @param a Заданное число a.
  */
-void printIndGreaterA(int arr[], const int n, const int a);
+void printIndexesGreaterThan(const int array[], int size, int threshold);
 
 /**
  * @brief заполнение массива вручную
@@ -91,7 +83,7 @@ void printIndGreaterA(int arr[], const int n, const int a);
  * @param min - минимальное значение диапазона значений элементов массива
  * @param max - максимальное значение диапазона значений элементов массива
  */
-void fillArray(int* arr, const int n, const int min, const int max);
+void fillArrayManually(int* array, int size, int min, int max);
 
 /**
 * @brief точка входа в программу
@@ -99,142 +91,142 @@ void fillArray(int* arr, const int n, const int min, const int max);
 */
 int main() {
     setlocale(LC_ALL, "Russian");
-    int n = getSize();
-    int* arr = new int[n];
+    int size = getArraySize();
+    int* array = new int[size];
 
     cout << "Введите минимальное и максимальное значение диапазона: ";
-    int minValue = getNumber();
-    int maxValue = getNumber();
-    checkRange(minValue, maxValue);
+    int min = getInteger();
+    int max = getInteger();
+    validateRange(min, max);
 
-    cout << "Введите выбор для заполнения массива: " << endl
-        << RANDOM << " Для случайного заполнения" << endl
-        << MANUALLY << " Для ручного заполнения" << endl;
+    cout << "Выберите способ заполнения массива:" << endl;
+    cout << "0 - Случайное заполнение" << endl;
+    cout << "1 - Ручное заполнение" << endl;
 
-    int choice = getNumber();
-    switch ((SELECT)choice) {
+    int choice = getInteger();
+    switch (choice) {
     case RANDOM:
-        fillArrayRandom(arr, n, minValue, maxValue);
+        fillArrayRandomly(array, size, min, max);
         break;
-    case MANUALLY:
-        fillArray(arr, n, minValue, maxValue);
+    case MANUAL:
+        fillArrayManually(array, size, min, max);
         break;
     default:
-        cout << "Ваш выбор неверен" << endl;
+        cout << "Некорректный выбор. " << endl;
+        delete[] array;
         return -1;
     }
 
-    cout << "Элементы массива:" << endl;
-    printArray(arr, n);
+    printArray(array, size);
 
-    cout << "Сумма нечётных элементов: " << findSumOf(arr, n) << endl;
+    cout << "Сумма нечетных элементов: " << sumOddElements(array, size) << endl;
 
-    int a;
-    cout << "Введите значение a: ";
-    a = getNumber();
-    printIndGreaterA(arr, n, a);
+    int threshold = getInteger();
+    cout << "Введите значение для сравнения: ";
+    printIndexesGreaterThan(array, size, threshold);
 
-    replaceSMaxNegative(arr, n);
-     printArray(arr, n);
-    delete[] arr; // Освобождаем память массива
+    replaceSecondWithMaxNegative(array, size);
+
+    cout << "Массив после замены второго элемента: " << endl;
+    printArray(array, size);
+
+    delete[] array; // Освобождение памяти массива
     return 0;
 }
-
-void checkN(const int n) {
-    if (n <= 0) {
-        cout << "Неправильный размер массива" << endl;
-        abort();
+// Проверка размера массива
+void validateArraySize(int size) {
+    if (size <= 0) {
+        cout << "Неправильный размер массива. Введите положительное число." << endl;
+        exit(1);
     }
 }
-
-size_t getSize() {
+// Считывание размера массива от пользователя
+int getArraySize() {
+    int size;
     cout << "Введите размер массива: ";
-    int n;
-    cin >> n;
-    checkN(n);
-    return (size_t)n;
+    cin >> size;
+    validateArraySize(size);
+    return size;
 }
-
-int getNumber() {
+// Считывание целого числа от пользователя
+int getInteger() {
     int number;
     cin >> number;
     if (cin.fail()) {
-        cout << "Неправильный ввод данных";
+        cout << "Неправильный ввод данных"<<endl;
         abort();
     }
     return number;
 }
-
-void printArray(const int* arr, const int n) {
-    for (size_t i = 0; i < n; i++) {
-        cout << "arr[" << i << "] = " << arr[i] << endl;
+// Вывод массива на экран
+void printArray(const int* array, int size) {
+    cout << "Элементы массива:" << endl;
+    for (int i = 0; i < size; ++i) {
+        cout << array[i] << " ";
+    }
+    cout << endl;
+}
+// Заполнение массива случайными числами в заданном диапазоне
+void fillArrayRandomly(int* array, int size, int min, int max) {
+    srand(time(0)); // Инициализация генератора случайных чисел
+    for (int i = 0; i < size; ++i) {
+        array[i] = rand() % (max - min + 1) + min;
     }
 }
-
-void fillArrayRandom(int* arr, const int n, const int min, const int max) {
-    srand(time(0));
-    for (size_t i = 0; i < n; i++) {
-        arr[i] = rand() % (max - min + 1) + min;
+    //Проверка диапазона значений
+void validateRange(int min, int max) {
+    if (min >= max) {
+        cout << "Неверный диапазон. Минимальное значение должно быть меньше максимального." << endl;
+        exit(1);
     }
 }
-
-void checkRange(const int min, const int max) {
-    if (min > max) {
-        cout << "Введен неправильный диапазон" << endl;
-        abort();
-    }
-}
-
-int findSumOf(int arr[], const int n) {
+// Нахождение суммы элементов массива с нечетными значениями
+int sumOddElements(const int array[], int size) {
     int sum = 0;
-    for (size_t i = 0; i < n; ++i) {
-        if (arr[i] % 2 != 0) {
-            sum += arr[i];
+    for (int i = 0; i < size; ++i) {
+        if (array[i] % 2 != 0) {
+            sum += array[i];
         }
     }
     return sum;
 }
+// Замена второго элемента массива на максимальный среди отрицательных
+void replaceSecondWithMaxNegative(int array[], int size) {
+    int maxNegative = INT_MIN;
+    bool foundNegative = false;
 
-void replaceSMaxNegative(int arr[], const int n) {
-    int maxNegativeIndex = getFirstN(arr, n);
-    int maxNegative = arr[maxNegativeIndex]; // Инициализируем максимальное отрицательное значение
-
-    for (size_t i = 0; i < n; ++i) {
-        if (arr[i] < 0 && arr[i] > maxNegative) {
-            maxNegative = arr[i];
-            maxNegativeIndex = i;
+    for (int i = 0; i < size; ++i) {
+        if (array[i] < 0 && array[i] > maxNegative) {
+            maxNegative = array[i];
+            foundNegative = true;
         }
     }
 
-    if (maxNegativeIndex != -1) {
-        arr[1] = maxNegative;
+    if (foundNegative) {
+        array[1] = maxNegative;
     }
 }
-
-void printIndGreaterA(int arr[], const int n, const int a) {
-    for (size_t i = 0; i < n; ++i) {
-        if (arr[i] > a) {
-            cout << "Индекс " << i << ": " << arr[i] << endl;
+// Вывод индексов элементов массива, значения которых больше заданного числа
+void printIndexesGreaterThan(const int array[], int size, int threshold) {
+    cout << "Индексы элементов, больших " << threshold << ":" << endl;
+    for (int i = 0; i < size; ++i) {
+        if (array[i] > threshold) {
+            cout << i << " ";
         }
+    }
+    cout << endl;
+}
+// Заполнение массива вручную
+void fillArrayManually(int* array, int size, int min, int max) {
+    cout << "Введите элементы массива:" << endl;
+    for (int i = 0; i < size; ++i) {
+        int number;
+        do {
+            number = getInteger();
+            if (number < min || number > max) {
+                cout << "Число должно быть в диапазоне [" << min << ", " << max << "]. Повторите ввод." << endl;
+            }
+        } while (number < min || number > max);
+        array[i] = number;
     }
 }
-
-void fillArray(int* arr, const int n, const int min, const int max) {
-    for (size_t i = 0; i < n; i++) {
-        cout << "Введите значение для arr[" << i << "]: ";
-        arr[i] = getNumber();
-
-        if (arr[i] < min || arr[i] > max) {
-            cout << "Значение вне диапазона" << endl;
-            i--;
-        }
-    }
-}
-int getFirstN(int* arr, const int n) {
-    for (int i = 0; i < n; i++) {
-        if (arr[i] < 0) {
-            return i;
-        }
-    }
-    return -1; // если нет отрицательных чисел в массиве
-} 
