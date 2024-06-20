@@ -1,94 +1,88 @@
-#include<iostream>
-#include<stdlib.h>
+#include<iostream> 
+#include<stdlib.h> 
 using namespace std;
 
 /*
-@brief Рассчитывает значение B
- * @param a-число
- * @param n-число
- * @return- значение функции В
+* @brief Рассчитывает значение B
+* @return возвращает значение
 */
-double getB(const double a,const double n);
+double getB(const double a, const double n);
+
 /*
-@brief Проверяет положительное ли значение n 
- * @param n-число
- * @return- значение n
+* @brief Проверяет положительные ли значения а и n
 */
 void checkN(const double n);
+
 /*
-@brief ввод значений с проверкой
- * @return- числа
+* @brief нужно для ввода значений
+* @return a
 */
 double getNumber();
+
 /*
-@brief Рассчитывает площадь прямоугольника
- * @param a-число
- * @param b-число
- * @return- площадь прямоугольника
+* @brief Рассчитывает площадь прямоугольника
+* @param area - область прямоугольника
+* @return area
 */
-double areaRectangle(const double a,const double b);
+double areaRectangle(const double a, const  double b);
+
 /*
-@brief Рассчитывает перимeтр прямоугольника
- * @param a-число
- * @param b-число
- * @return- перимeтр прямоугольника
+* @brief Рассчитывает перимeтр прямоугольника
+* @param perimeter- периметр фигуры
+* @return perimeter
 */
-/*
-@brief Рассчитывает перимeтр прямоугольника
- * @param a-число
- * @param b-число
- * @return- перимeтр прямоугольника
-*/
-double perimeterRectangle(const double a,const double b);
+double perimeterRectangle(const double a, const double b);
 
 int main()
 {
-cout << "Введите первую сторону " ;
-double a = getNumber();
-checkN(a);
-cout << "Введите процентнoе соотношение для второй стороны " ;
-double n = getNumber();
-checkN(n);
-double b = getB(a,n);
-cout << "Площадь = " << areaRectangle(a, b) << endl;
-cout << "Перимeтр = " << perimeterRectangle(a, b);
-return 0;
+ setlocale(LC_ALL, "Russian");
+ cout << "Введите первую сторону ";
+ double a = getNumber();
+ checkN(a);
+ cout << "Введите процентнoе соотношение для второй стороны ";
+ double n = getNumber();
+ checkN(n);
+ double b = getB(a, n);
+ cout << "Площадь = " << areaRectangle(a, b) << endl;
+ cout << "Перимeтр = " << perimeterRectangle(a, b);
+ return 0;
 }
 
 double getNumber()
 {
-double a;
-cin >> a;
-if (cin.fail())
-{
-cout<<"Incorrect input";
-abort();
-}
-return a;
-}
-
-void checkN(double n)
-{
-if (n <= 0)
-{
-cout<<"Wrong value"<<endl;
-abort();
-}
+ double a;
+ cin >> a;
+ if (cin.fail())
+ {
+  cout << "Неправильный ввод данных";
+  abort();
+ }
+ return a;
 }
 
-double getB(double a, double n)
+void checkN(const double n)
 {
-return a*n/100;
+ if (n <= 0)
+ {
+  cout << "Неправильное значение" << endl;
+  abort();
+ }
 }
 
-double areaRectangle(double a, double b)
+double getB(const double a,const double n)
 {
-double area = a * b;
-return area;
+ double k = a * n / 100;
+ return 0;
 }
 
-double perimeterRectangle(double a, double b)
+double areaRectangle(const double a, const double b)
 {
-double perimeter = 2*(a + b);
-return perimeter;
+ double area = a * b;
+ return area;
+}
+
+double perimeterRectangle(const double a, const double b)
+{
+ double perimeter = 2 * (a + b);
+ return perimeter;
 }
