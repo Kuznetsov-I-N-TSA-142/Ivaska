@@ -8,13 +8,13 @@ using namespace std;
  * @param n-число
  * @return- значение функции В
 */
-double getB(double a, double n);
+double getB(const double a,const double n);
 /*
 @brief Проверяет положительное ли значение n 
  * @param n-число
  * @return- значение n
 */
-void checkN(double n);
+void checkN(const double n);
 /*
 @brief ввод значений с проверкой
  * @return- числа
@@ -26,7 +26,13 @@ double getNumber();
  * @param b-число
  * @return- площадь прямоугольника
 */
-double areaRectangle(double a, double b);
+double areaRectangle(const double a,const double b);
+/*
+@brief Рассчитывает перимeтр прямоугольника
+ * @param a-число
+ * @param b-число
+ * @return- перимeтр прямоугольника
+*/
 /*
 @brief Рассчитывает перимeтр прямоугольника
  * @param a-число
