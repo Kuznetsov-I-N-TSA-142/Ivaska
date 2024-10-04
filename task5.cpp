@@ -47,7 +47,7 @@ int main()
     cout << "Enter the number of elements = ";
     int a = static_cast<int>(getValue());
     checkValue(a);
-    cout << "Enter the element from which the sequence will begin = ";
+    cout << "Enter the element from which the sequence will begin except 0 = ";
     double b = getValue();
     checkValue(b);
     cout << "The sum of the first elements = " << getSum(a) << endl;
