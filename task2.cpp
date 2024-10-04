@@ -1,12 +1,12 @@
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib> // для abort
 using namespace std;
 
 /**
  * @brief Рассчитывает значение второй стороны прямоугольника на основе первой стороны и процентного соотношения.
  * 
- * @param a Первая сторона прямоугольника.
- * @param n Процентное соотношение для расчета второй стороны.
+ * @param a Первая сторона прямоугольника (положительное число).
+ * @param n Процентное соотношение для расчета второй стороны (положительное число).
  * @return Возвращает значение второй стороны прямоугольника.
  */
 double getB(const double a, const double n);
@@ -30,8 +30,8 @@ double getNumber();
 /**
  * @brief Рассчитывает площадь прямоугольника.
  * 
- * @param a Первая сторона прямоугольника.
- * @param b Вторая сторона прямоугольника.
+ * @param a Первая сторона прямоугольника (положительное число).
+ * @param b Вторая сторона прямоугольника (положительное число).
  * @return Возвращает площадь прямоугольника.
  */
 double areaRectangle(const double a, const double b);
@@ -39,8 +39,8 @@ double areaRectangle(const double a, const double b);
 /**
  * @brief Рассчитывает периметр прямоугольника.
  * 
- * @param a Первая сторона прямоугольника.
- * @param b Вторая сторона прямоугольника.
+ * @param a Первая сторона прямоугольника (положительное число).
+ * @param b Вторая сторона прямоугольника (положительное число).
  * @return Возвращает периметр прямоугольника.
  */
 double perimeterRectangle(const double a, const double b);
@@ -49,14 +49,14 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
     cout << "Введите первую сторону: ";
-    double a = getNumber();
+    const double a = getNumber();
     checkN(a);
     cout << "Введите процентное соотношение для второй стороны: ";
-    double n = getNumber();
+    const double n = getNumber();
     checkN(n);
-    double b = getB(a, n);
+    const double b = getB(a, n);
     cout << "Площадь = " << areaRectangle(a, b) << endl;
-    cout << "Периметр = " << perimeterRectangle(a, b);
+    cout << "Периметр = " << perimeterRectangle(a, b) << endl;
     return 0;
 }
 
@@ -83,18 +83,18 @@ void checkN(const double n)
 
 double getB(const double a, const double n)
 {
-    double k = a * n / 100; // Вычисляем значение второй стороны
-    return k; // Исправлено: теперь возвращается рассчитанное значение
+    const double k = a * n / 100; // Вычисляем значение второй стороны
+    return k; // Возвращаем рассчитанное значение
 }
 
 double areaRectangle(const double a, const double b)
 {
-    double area = a * b; // Вычисляем площадь
+    const double area = a * b; // Вычисляем площадь
     return area; // Возвращаем площадь
 }
 
 double perimeterRectangle(const double a, const double b)
 {
-    double perimeter = 2 * (a + b); // Вычисляем периметр
+    const double perimeter = 2 * (a + b); // Вычисляем периметр
     return perimeter; // Возвращаем периметр
 }
