@@ -53,7 +53,7 @@ void printTabFunction(const double minValue, const double maxValue, const double
 {
     cout << setw(10) << "x" << setw(15) << "y" << endl;
     
-    for (double i = minValue; i <= maxValue; i += step)
+    for (double i = minValue; i < maxValue + step; i += step)
     {
         if (i < 0) {
             cout << setw(10) << i << " Функция неопределена, под корнем отрицательное значение или ноль!" << endl;
