@@ -38,13 +38,16 @@ double areaRectangle(const double a, const double b);
 
 /**
  * @brief Рассчитывает периметр прямоугольника.
- * 
  * @param a Первая сторона прямоугольника (положительное число).
  * @param b Вторая сторона прямоугольника (положительное число).
  * @return Возвращает периметр прямоугольника.
  */
 double perimeterRectangle(const double a, const double b);
 
+/**
+ * @brief Главная функция программы.
+ * @return Возвращает  в случае успеха.
+ */
 int main()
 {
     setlocale(LC_ALL, "Russian");
