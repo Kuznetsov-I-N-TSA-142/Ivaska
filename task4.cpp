@@ -51,11 +51,6 @@ int main()
 
 void printTabFunction(const double minValue, const double maxValue, const double step)
 {
-    cout << setw(10) << "x" << setw(15) << "y" << endl;
-    
-    for (double i = minValue; i < maxValue + step; i += step)
-    {
-        if (i < 0) {
             cout << setw(10) << i << " Функция неопределена, под корнем отрицательное значение или ноль!" << endl;
         } else {
             const double a = 3 * sin(sqrt(i)) + 0.39 * i - 3.8;
