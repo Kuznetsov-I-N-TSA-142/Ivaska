@@ -143,8 +143,9 @@ void replaceSecondWithMaxNegative(int array[], size_t size) {
     }
 }
 
-// Вывод индексов элементов массива, значения которых больше заданного числа
-void printIndexesGreaterThan(const int array[], size_t size, int threshold) {
+// Вывод индексов элементов массива, больших заданного значения
+void
+printIndexesGreaterThan(const int array[], size_t size, int threshold) {
     cout << "Индексы элементов, больших " << threshold << ":" << endl;
     for (size_t i = 0; i < size; ++i) {
         if (array[i] > threshold) {
@@ -154,27 +155,27 @@ void printIndexesGreaterThan(const int array[], size_t size, int threshold) {
     cout << endl;
 }
 
-// Заполнение массива вручную
+// Заполнение массива вручную пользователем
 void fillArrayManually(int* array, size_t size, int min, int max) {
-    cout << "Введите элементы массива:" << endl;
+    cout << "Введите " << size << " элементов массива в диапазоне от " << min << " до " << max << ":" << endl;
     for (size_t i = 0; i < size; ++i) {
-        int number;
+        int element;
         do {
-            number = getInteger();
-            if (number < min || number > max) {
-                cout << "Число должно быть в диапазоне [" << min << ", " << max << "]. Повторите ввод." << endl;
+            cin >> element;
+            if (element < min || element > max) {
+                cout << "Введите число в диапазоне от " << min << " до " << max << ": ";
             }
-        } while (number < min || number > max);
-        array[i] = number;
+        } while (element < min || element > max);
+        array[i] = element;
     }
 }
 
-// Функция для нахождения первого элемента массива >= n
+// Поиск первого элемента массива, большего или равного заданному значению
 int getFirstN(const int* array, size_t size, int n) {
     for (size_t i = 0; i < size; ++i) {
         if (array[i] >= n) {
             return array[i];
         }
     }
-    return -1; // Если не найдено подходящее значение
+    return -1; // Значение не найдено
 }
