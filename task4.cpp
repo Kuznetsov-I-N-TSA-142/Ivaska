@@ -3,19 +3,19 @@
 #include <iomanip>
 using namespace std;
 
-/**
+/*
  * @brief Проверяет, положительное ли значение
  * @param n - число
  */
 void checkN(const double n);
 
-/**
+/*
  * @brief Ввод значений с проверкой
  * @return Введенное число
  */
 double getNumber();
 
-/**
+/*
  * @brief Табулирует заданную функцию
  * @param minValue - минимальное значение функции
  * @param maxValue - максимальное значение функции
@@ -23,14 +23,14 @@ double getNumber();
  */
 void printTabFunction(const double minValue, const double maxValue, const double step);
 
-/**
+/*
  * @brief Проверяет, что минимум меньше максимума
  * @param min - минимальное значение функции
  * @param max - максимальное значение функции
  */
 void checkRange(const double min, const double max);
 
-/**
+/*
  * @brief Главная функция программы
  * @return Возвращает 0, если функция выполнена верно, иначе 1.
  */
@@ -49,8 +49,9 @@ int main()
     return 0;
 }
 
-void printTabFunction(const double minValue, const double maxValue, const double step)
-{
+void printTabFunction(const double minValue, const double maxValue, const double step) {
+    for (double i = minValue; i <= maxValue; i += step) {
+        if (i <= 0) {
             cout << setw(10) << i << " Функция неопределена, под корнем отрицательное значение или ноль!" << endl;
         } else {
             const double a = 3 * sin(sqrt(i)) + 0.39 * i - 3.8;
