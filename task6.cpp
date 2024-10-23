@@ -16,46 +16,36 @@ int sumOddElements(const int array[], size_t size);
 void replaceSecondWithMaxNegative(int array[], size_t size);
 void printIndexesGreaterThan(const int array[], size_t size, int threshold);
 void fillArrayManually(int* array, size_t size, int min, int max);
+int getFirstNegative(const int* array, size_t size);
 int getFirstN(const int* array, size_t size, int n);
 
 int main() {
-    size_t size = getArraySize();//Получаем размер массива
-    
-    int* array = new int[size];//Создаём динамический массив
-    
+    size_t size = getArraySize(); // Получаем размер массива
+
+    int* array = new int[size]; // Создаем динамический массив
+
     int min, max;
     cout << "Введите минимальное значение диапазона: ";
     cin >> min;
     cout << "Введите максимальное значение диапазона: ";
     cin >> max;
-    validateRange(min, max);
+    validateRange(min, max); // Проверка диапазона значений
 
-    fillArrayRandomly(array, size, min, max);
-    printArray(array, size);
-
-    // Пример использования getFirstN
-    int n;
-    cout << "Введите значение n: ";
-    cin >> n;
-    int firstN = getFirstN(array, size, n);
-    if (firstN == -1) {
-        cout << "Значение не найдено." << endl;
-    } else {
-        cout << "Первое значение больше или равно " << n << ": " << firstN << endl;
-    }
+    fillArrayRandomly(array, size, min, max); // Заполняем массив случайными числами
+    printArray(array, size); // Выводим массив
 
     cout << "Сумма нечетных элементов: " << sumOddElements(array, size) << endl;
 
-    replaceSecondWithMaxNegative(array, size);
-    printArray(array, size);
+    replaceSecondWithMaxNegative(array, size); // Замена второго элемента на максимальный отрицательный
+    printArray(array, size); // Выводим массив после замены
 
     int threshold;
     cout << "Введите пороговое значение для индексов: ";
     cin >> threshold;
-    printIndexesGreaterThan(array, size, threshold);
+    printIndexesGreaterThan(array, size, threshold); // Вывод индексов элементов, превышающих пороговое значение
 
-    fillArrayManually(array, size, min, max);
-    printArray(array, size);
+    fillArrayManually(array, size, min, max); // Ввод массива вручную
+    printArray(array, size); // Выводим массив после ручного ввода
 
     delete[] array; // Освобождение памяти массива
     return 0;
@@ -78,7 +68,6 @@ size_t getArraySize() {
     return size;
 }
 
-// Считывание целого числа от пользователя
 int getInteger() {
     int number;
     cin >> number;
@@ -125,27 +114,37 @@ int sumOddElements(const int array[], size_t size) {
     return sum;
 }
 
+// Поиск первого отрицательного числа в массиве
+int getFirstNegative(const int* array, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (array[i] < 0) {
+            return array[i];
+        }
+    }
+    return 0; // Если отрицательных чисел нет, возвращаем 0
+}
+
+
 // Замена второго элемента массива на максимальный среди отрицательных
 void replaceSecondWithMaxNegative(int array[], size_t size) {
     if (size < 2) return; // Если размер меньше 2, ничего не делаем
 
-    int maxNegative = getFirstNegative(array, size); // Используем первое отрицательное число
-bool foundNegative = false;
-
+    int maxNegative = getFirstNegative(array, size); // Используем первое отрицательное число 
+    bool foundNegative = false;
     for (size_t i = 0; i < size; ++i) {
         if (array[i] < 0 && array[i] > maxNegative) {
-            maxNegative = array[i]; foundNegative = true;
+            maxNegative = array[i];
+            foundNegative = true;
         }
     }
 
     if (foundNegative) {
-        array[1] = maxNegative;
+        array[1] = maxNegative; // Заменяем второй элемент массива на максимальное отрицательное число
     }
 }
 
 // Вывод индексов элементов массива, больших заданного значения
-void
-printIndexesGreaterThan(const int array[], size_t size, int threshold) {
+void printIndexesGreaterThan(const int array[], size_t size, int threshold) {
     cout << "Индексы элементов, больших " << threshold << ":" << endl;
     for (size_t i = 0; i < size; ++i) {
         if (array[i] > threshold) {
