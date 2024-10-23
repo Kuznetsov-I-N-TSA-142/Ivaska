@@ -129,7 +129,7 @@ int sumOddElements(const int array[], size_t size) {
 void replaceSecondWithMaxNegative(int array[], size_t size) {
     if (size < 2) return; // Если размер меньше 2, ничего не делаем
 
-    int maxNegative = INT_MIN;
+    int maxNegative = 0; //Можно инициализировать нулем или первым найденным отрицательным числом
     bool foundNegative = false;
 
     for (size_t i = 0; i < size; ++i) {
