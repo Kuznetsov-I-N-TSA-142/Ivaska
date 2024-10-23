@@ -19,9 +19,9 @@ void fillArrayManually(int* array, size_t size, int min, int max);
 int getFirstN(const int* array, size_t size, int n);
 
 int main() {
-    size_t size = getArraySize();
+    size_t size = getArraySize();//Получаем размер массива
     
-    int* array = new int[size];
+    int* array = new int[size];//Создаём динамический массив
     
     int min, max;
     cout << "Введите минимальное значение диапазона: ";
